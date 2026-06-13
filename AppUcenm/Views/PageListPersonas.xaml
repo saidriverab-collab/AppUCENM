@@ -1,0 +1,45 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:AppUCENM.Models"
+             x:Class="AppUCENM.Views.PageListPersonas"
+             Title="Lista de Personas">
+    <ContentPage.Resources>
+        <Style x:Key="CardLabel" TargetType="Label">
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+    </ContentPage.Resources>
+
+    <VerticalStackLayout Padding="12" Spacing="8">
+        <SearchBar x:Name="SearchBar" Placeholder="Buscar por nombre, apellido, correo o telefono" SearchButtonPressed="SearchBar_SearchButtonPressed" TextChanged="SearchBar_TextChanged"/>
+        <CollectionView x:Name="CollectionViewPersons" SelectionMode="None" ItemsLayout="VerticalList">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Personas">
+                    <Frame BorderColor="LightGray" CornerRadius="8" Padding="8" Margin="4">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <CheckBox Grid.Column="0" IsChecked="{Binding IsSelected}" CheckedChanged="CheckBox_CheckedChanged" VerticalOptions="Center" HorizontalOptions="Start" />
+
+                            <StackLayout Grid.Column="1">
+                                <Label Text="{Binding Nombre}" FontAttributes="Bold" />
+                                <Label Text="{Binding Apellido}" Style="{StaticResource CardLabel}" />
+                                <Label Text="{Binding Correo}" Style="{StaticResource CardLabel}" />
+                                <Label Text="{Binding Telefono}" Style="{StaticResource CardLabel}" />
+                                <Label Text="{Binding FechaNacimiento, StringFormat='{0:dd/MM/yyyy}'}" Style="{StaticResource CardLabel}" />
+                            </StackLayout>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <HorizontalStackLayout Spacing="12" HorizontalOptions="Center">
+            <Button x:Name="BtnEditar" Text="Editar" Clicked="BtnEditar_Clicked" IsEnabled="False"/>
+            <Button x:Name="BtnEliminar" Text="Eliminar" Clicked="BtnEliminar_Clicked" IsEnabled="False"/>
+            <Button Text="Refrescar" Clicked="BtnRefrescar_Clicked"/>
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>
