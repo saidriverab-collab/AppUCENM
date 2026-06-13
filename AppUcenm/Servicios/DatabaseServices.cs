@@ -9,7 +9,7 @@ namespace AppUCENM.Servicios
 {
     public class DatabaseServices
     {
-        private SQLiteAsyncConnection _connection;
+        private SQLiteAsyncConnection? _connection;
 
         public async Task Init()
         {

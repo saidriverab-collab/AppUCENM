@@ -1,5 +1,6 @@
 using AppUCENM.Controllers;
 using AppUCENM.Models;
+using Microsoft.Maui.Media;
 
 
 namespace AppUCENM.Views;
@@ -7,8 +8,9 @@ namespace AppUCENM.Views;
 public partial class PageAddPersonas : ContentPage
 {
 	private PersonasController personasController;
+    private string fotoBase64 = string.Empty;
 
-	public PageAddPersonas()
+    public PageAddPersonas()
 	{
 		InitializeComponent();
 		personasController = new PersonasController();
@@ -16,16 +18,17 @@ public partial class PageAddPersonas : ContentPage
 
 	private async void btnGuardar_Clicked(object sender, EventArgs e)
 	{
-		Personas person = new()
-		{
-			Nombre = Nombre.Text ?? string.Empty,
-			Apellido = Apellido.Text ?? string.Empty,
-			FechaNacimiento = FechaNac.Date ?? DateTime.Now,
-			Correo = Correo.Text ?? string.Empty,
-			Telefono = Telefono.Text ?? string.Empty
-		};
+        Personas person = new()
+        {
+            Nombre = Nombre.Text ?? string.Empty,
+            Apellido = Apellido.Text ?? string.Empty,
+            FechaNacimiento = FechaNac.Date ?? DateTime.Today,
+            Correo = Correo.Text ?? string.Empty,
+            Telefono = Telefono.Text ?? string.Empty,
+            FotoBase64 = fotoBase64
+        };
 
-		try
+        try
 		{
 			await personasController.GuardarPerson(person);
 			await DisplayAlert("Informacion", "Registro Guardado", "OK");
@@ -41,4 +44,32 @@ public partial class PageAddPersonas : ContentPage
 	{
 		await Navigation.PushAsync(new PageListPersonas());
 	}
+
+
+    private async void BtnTomarFoto_Clicked(object sender, EventArgs e)
+    {
+        try
+        {
+            var foto = await MediaPicker.CapturePhotoAsync();
+
+            if (foto == null)
+                return;
+
+            using var stream = await foto.OpenReadAsync();
+
+            using MemoryStream ms = new MemoryStream();
+            await stream.CopyToAsync(ms);
+
+            byte[] bytes = ms.ToArray();
+
+            fotoBase64 = Convert.ToBase64String(bytes);
+
+            FotoPersona.Source = ImageSource.FromStream(() =>
+                new MemoryStream(bytes));
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error", "No se pudo tomar la foto: " + ex.Message,"OK");
+        }
+    }
 }

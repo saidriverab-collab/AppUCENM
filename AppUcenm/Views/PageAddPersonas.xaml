@@ -32,6 +32,20 @@
                 <Entry x:Name="Telefono" Placeholder="9XXXXXXXX" Keyboard="Telephone" />
             </StackLayout>
 
+            <StackLayout>
+                <Label Text="Fotografía" />
+
+                <Image
+        x:Name="FotoPersona"
+        HeightRequest="200"
+        WidthRequest="200"
+        Aspect="AspectFill" />
+
+                <Button
+        Text="Tomar Foto"
+        Clicked="BtnTomarFoto_Clicked" />
+            </StackLayout>
+
             <Button Text="Guardar" Clicked="btnGuardar_Clicked" HorizontalOptions="Center" WidthRequest="200" />
             <Button Text="Ver lista" Clicked="BtnVerLista_Clicked" HorizontalOptions="Center" WidthRequest="200" />
         </VerticalStackLayout>

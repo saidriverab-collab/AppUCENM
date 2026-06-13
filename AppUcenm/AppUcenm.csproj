@@ -65,6 +65,7 @@
 
 	<ItemGroup>
 	  <Folder Include="Controles\" />
+	  <Folder Include="GIT\" />
 	</ItemGroup>
 
 	<ItemGroup>
