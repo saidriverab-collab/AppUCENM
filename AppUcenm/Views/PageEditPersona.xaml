@@ -1,10 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppUCENM.Views.PageEditPersona"
              Title="Editar Persona">
+
     <ScrollView>
         <VerticalStackLayout Padding="24" Spacing="12">
-            <Label Text="Editar datos" FontAttributes="Bold" FontSize="20" HorizontalOptions="Center" />
+
+            <Label Text="Editar datos"
+                   FontAttributes="Bold"
+                   FontSize="20"
+                   HorizontalOptions="Center" />
 
             <Label Text="Nombre" />
             <Entry x:Name="NombreEntry" />
@@ -13,15 +19,35 @@
             <Entry x:Name="ApellidoEntry" />
 
             <Label Text="Fecha de nacimiento" />
-            <DatePicker x:Name="FechaNacimientoPicker" Format="dd/MM/yyyy" />
+            <DatePicker x:Name="FechaNacimientoPicker"
+                        Format="dd/MM/yyyy" />
 
             <Label Text="Correo electronico" />
-            <Entry x:Name="CorreoEntry" Keyboard="Email" />
+            <Entry x:Name="CorreoEntry"
+                   Keyboard="Email" />
 
             <Label Text="Telefono" />
-            <Entry x:Name="TelefonoEntry" Keyboard="Telephone" />
+            <Entry x:Name="TelefonoEntry"
+                   Keyboard="Telephone" />
 
-            <Button Text="Guardar cambios" Clicked="BtnGuardar_Clicked" HorizontalOptions="Center" WidthRequest="200" />
+            <Label Text="Fotografía" />
+
+            <Image x:Name="FotoPersona"
+                   HeightRequest="200"
+                   WidthRequest="200"
+                   Aspect="AspectFill"
+                   HorizontalOptions="Center" />
+
+            <Button Text="Cambiar Foto"
+                    Clicked="BtnCambiarFoto_Clicked"
+                    HorizontalOptions="Center" />
+
+            <Button Text="Guardar cambios"
+                    Clicked="BtnGuardar_Clicked"
+                    HorizontalOptions="Center"
+                    WidthRequest="200" />
+
         </VerticalStackLayout>
     </ScrollView>
+
 </ContentPage>
