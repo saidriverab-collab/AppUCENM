@@ -46,7 +46,7 @@ public partial class PageAddPersonas : ContentPage
 
     private async void BtnTomarFoto_Clicked(object sender, EventArgs e)
     {
-        // Solicitar permiso de cámara
+        
         var status = await Permissions.RequestAsync<Permissions.Camera>();
 
         if (status != PermissionStatus.Granted)
@@ -68,14 +68,14 @@ public partial class PageAddPersonas : ContentPage
             using MemoryStream ms = new MemoryStream();
             await stream.CopyToAsync(ms);
 
+
             byte[] bytes = ms.ToArray();
 
             // Convertir imagen a Base64
             fotoBase64 = Convert.ToBase64String(bytes);
 
             // Mostrar imagen en la aplicación
-            FotoPersona.Source = ImageSource.FromStream(() =>
-                new MemoryStream(bytes));
+            FotoPersona.Source = ImageSource.FromStream(() => new MemoryStream(bytes));
         }
         catch (Exception ex)
         {

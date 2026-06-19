@@ -69,8 +69,7 @@ public partial class PageEditPersona : ContentPage
 
             fotoBase64 = Convert.ToBase64String(bytes);
 
-            FotoPersona.Source = ImageSource.FromStream(() =>
-                new MemoryStream(bytes));
+            FotoPersona.Source = ImageSource.FromStream(() => new MemoryStream(bytes));
         }
         catch (Exception ex)
         {

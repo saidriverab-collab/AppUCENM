@@ -34,8 +34,7 @@ namespace AppUCENM.Models
 
                 byte[] bytes = Convert.FromBase64String(FotoBase64);
 
-                return ImageSource.FromStream(() =>
-                    new MemoryStream(bytes));
+                return ImageSource.FromStream(() => new MemoryStream(bytes));
             }
         }
 
